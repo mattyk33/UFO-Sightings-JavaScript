@@ -46,3 +46,22 @@ function runEnter() {
 
     // Filter Data with datetime equal to input value
     var filteredData = tableData.filter(ufoObject => ufoObject.datetime === inputValue);
+
+    // Clear out current contents in the table
+    tbody.html("");
+    
+    // Loop through each ufo object in the data array
+    filteredData.forEach((ufoObject) => {
+
+	// Append one table row for each ufo object
+	var row = tbody.append("tr");
+
+	// Use `Object.entries` and forEach to iterate through keys and values of ufo object
+	Object.entries(ufoObject).forEach(([key, value]) => {
+
+		// Append one cell per ufo object value 
+		var cell = row.append("td");
+        cell.text(value);
+    });
+});
+}
