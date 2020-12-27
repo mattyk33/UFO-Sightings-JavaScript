@@ -1,9 +1,6 @@
 // from data.js
 var tableData = data;
 
-// from data.js
-var tableData = data;
-
 // Write code that appends a table to your web page and then adds new rows of data for each UFO sighting.
 
 // Get a reference to the table body
@@ -37,15 +34,15 @@ form.on("submit", runEnter);
 
 // Complete the event handler function for the form
 function runEnter() {
-
+    
     // Prevent the page from refreshing
     d3.event.preventDefault();
 
-    // Select the input element and get the raw HTML node
-    //Option 2 Harder to figure Out
-    var elementChanged =d3.select(this).select("input")
-    var elementValue= elementChanged.property("value")
-    var filterId = elementChanged.attr("id")
+    // // Select the input element and get the raw HTML node
+    // //Option 2 Harder to figure Out
+    // var elementChanged =d3.select("#input")
+    // var inputValue= elementChanged.property("value")
+    // var filterId = elementChanged.attr("id")
 
     // Option 1 If Statements Long
     var inputDate = d3.select("#datetime");
@@ -55,23 +52,36 @@ function runEnter() {
     var inputShape = d3.select("#shape");
 
     // Get the value property of the input element
-    var inputDateValue = inputDate.property("value");
-    var inputCityValue = inputCity.property("value");
-    var inputStateValue = inputState.property("value");
-    var inputCountryValue = inputCountry.property("value");
-    var inputShapeValue = inputShape.property("value");
+    var inputDateValue = inputDate.property("value").toLowerCase();
+    var inputCityValue = inputCity.property("value").toLowerCase();
+    var inputStateValue = inputState.property("value").toLowerCase();
+    var inputCountryValue = inputCountry.property("value").toLowerCase();
+    var inputShapeValue = inputShape.property("value").toLowerCase();
 
     // Filter Data with datetime equal to input value
     var filteredData = tableData;
     
-    
-    filterData= filteredData.filter(date => date.datetime === inputDateValue);
-
+    if (inputDateValue) {
+        filterData = filteredData.filter(ufoObject => ufoObject.datetime === inputDateValue);
+    }
+    if (inputCityValue) {
+        filterData = filteredData.filter(ufoObject => ufoObject.city === inputCityValue);
+    }
+    if (inputStateValue) {
+        filterData = filteredData.filter(ufoObject => ufoObject.state === inputStateValue);
+    }
+    if (inputCountryValue) {
+        filterData = filteredData.filter(ufoObject => ufoObject.country === inputCountryValue);
+    }
+    if (inputShapeValue) {
+        filterData = filteredData.filter(ufoObject => ufoObject.shape === inputShapeValue);
+    }
+  
     // Clear out current contents in the table
     tbody.html("");
-    
+
     // Loop through each ufo object in the data array
-    filteredData.forEach((ufoObject) => {
+    filterData.forEach((ufoObject) => {
 
 	// Append one table row for each ufo object
 	var row = tbody.append("tr");
