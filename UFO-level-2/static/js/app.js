@@ -52,46 +52,181 @@ function runEnter() {
     var inputShape = d3.select("#shape");
 
     // Get the value property of the input element
-    var inputDateValue = inputDate.property("value").toLowerCase();
-    var inputCityValue = inputCity.property("value").toLowerCase();
-    var inputStateValue = inputState.property("value").toLowerCase();
-    var inputCountryValue = inputCountry.property("value").toLowerCase();
-    var inputShapeValue = inputShape.property("value").toLowerCase();
+    var inputDateValue = inputDate.property("value");
+    var inputCityValue = inputCity.property("value");
+    var inputStateValue = inputState.property("value");
+    var inputCountryValue = inputCountry.property("value");
+    var inputShapeValue = inputShape.property("value");
 
     // Filter Data with datetime equal to input value
     var filteredData = tableData;
     
-    if (inputDateValue) {
-        filterData = filteredData.filter(ufoObject => ufoObject.datetime === inputDateValue);
+    if (inputDateValue != "") {
+        var filterData = filteredData.filter(ufoObject => ufoObject.datetime === inputDateValue);
+        		// 3. Load the new data
+		if (filterData.length !== 0) {
+			    // Clear out current contents in the table
+                tbody.html("");
+
+                // Loop through each ufo object in the data array
+                filterData.forEach((ufoObject) => {
+            
+                // Append one table row for each ufo object
+                var row = tbody.append("tr");
+            
+                // Use `Object.entries` and forEach to iterate through keys and values of ufo object
+                Object.entries(ufoObject).forEach(([key, value]) => {
+            
+                    // Append one cell per ufo object value 
+                    var cell = row.append("td");
+                    cell.text(value);
+                });
+            });
+		}
+		else {
+			// Clear out the previously loaded HTML:
+			tbody.html("");
+			
+			// Tell them "No rows match"
+			tbody.append("tr").append("td").text("No sightings on this date.");
+		}
     }
-    if (inputCityValue) {
-        filterData = filteredData.filter(ufoObject => ufoObject.city === inputCityValue);
+    else if (inputCityValue != "") {
+        var filterData = filteredData.filter(ufoObject => ufoObject.city === inputCityValue);
+        
+        if (filterData.length !== 0) {
+            // Clear out current contents in the table
+            tbody.html("");
+
+            // Loop through each ufo object in the data array
+            filterData.forEach((ufoObject) => {
+        
+            // Append one table row for each ufo object
+            var row = tbody.append("tr");
+        
+            // Use `Object.entries` and forEach to iterate through keys and values of ufo object
+            Object.entries(ufoObject).forEach(([key, value]) => {
+        
+                // Append one cell per ufo object value 
+                var cell = row.append("td");
+                cell.text(value);
+                });
+            });
+        }
+        else {
+            // Clear out the previously loaded HTML:
+            tbody.html("");
+        
+            // Tell them "No rows match"
+            tbody.append("tr").append("td").text("No sightings in this city.");
+        }
     }
-    if (inputStateValue) {
-        filterData = filteredData.filter(ufoObject => ufoObject.state === inputStateValue);
+    else if (inputStateValue != "") {
+        var filterData = filteredData.filter(ufoObject => ufoObject.state === inputStateValue);
+
+        if (filterData.length !== 0) {
+            // Clear out current contents in the table
+            tbody.html("");
+
+            // Loop through each ufo object in the data array
+            filterData.forEach((ufoObject) => {
+        
+            // Append one table row for each ufo object
+            var row = tbody.append("tr");
+        
+            // Use `Object.entries` and forEach to iterate through keys and values of ufo object
+            Object.entries(ufoObject).forEach(([key, value]) => {
+        
+                // Append one cell per ufo object value 
+                var cell = row.append("td");
+                cell.text(value);
+            });
+        });
     }
-    if (inputCountryValue) {
-        filterData = filteredData.filter(ufoObject => ufoObject.country === inputCountryValue);
+        else {
+            // Clear out the previously loaded HTML:
+            tbody.html("");
+        
+            // Tell them "No rows match"
+            tbody.append("tr").append("td").text("No sightings in this state.");
+        }
     }
-    if (inputShapeValue) {
-        filterData = filteredData.filter(ufoObject => ufoObject.shape === inputShapeValue);
+    else if (inputCountryValue != "") {
+        var filterData = filteredData.filter(ufoObject => ufoObject.country === inputCountryValue);
+
+        if (filterData.length !== 0) {
+            // Clear out current contents in the table
+            tbody.html("");
+
+            // Loop through each ufo object in the data array
+            filterData.forEach((ufoObject) => {
+        
+            // Append one table row for each ufo object
+            var row = tbody.append("tr");
+        
+            // Use `Object.entries` and forEach to iterate through keys and values of ufo object
+            Object.entries(ufoObject).forEach(([key, value]) => {
+        
+                // Append one cell per ufo object value 
+                var cell = row.append("td");
+                cell.text(value);
+            });
+        });
+    }
+        else {
+            // Clear out the previously loaded HTML:
+            tbody.html("");
+        
+            // Tell them "No rows match"
+            tbody.append("tr").append("td").text("No sightings in this country.");
+        }
+    }
+    else {
+        var filterData = filteredData.filter(ufoObject => ufoObject.shape === inputShapeValue);
+
+        if (filterData.length !== 0) {
+            // Clear out current contents in the table
+            tbody.html("");
+
+            // Loop through each ufo object in the data array
+            filterData.forEach((ufoObject) => {
+        
+            // Append one table row for each ufo object
+            var row = tbody.append("tr");
+        
+            // Use `Object.entries` and forEach to iterate through keys and values of ufo object
+            Object.entries(ufoObject).forEach(([key, value]) => {
+        
+                // Append one cell per ufo object value 
+                var cell = row.append("td");
+                cell.text(value);
+            });
+        });
+    }
+        else {
+            // Clear out the previously loaded HTML:
+            tbody.html("");
+        
+            // Tell them "No rows match"
+            tbody.append("tr").append("td").text("No sightings for this shape");
+        }
     }
   
-    // Clear out current contents in the table
-    tbody.html("");
+//     // Clear out current contents in the table
+//     tbody.html("");
 
-    // Loop through each ufo object in the data array
-    filterData.forEach((ufoObject) => {
+//     // Loop through each ufo object in the data array
+//     filterData.forEach((ufoObject) => {
 
-	// Append one table row for each ufo object
-	var row = tbody.append("tr");
+// 	// Append one table row for each ufo object
+// 	var row = tbody.append("tr");
 
-	// Use `Object.entries` and forEach to iterate through keys and values of ufo object
-	Object.entries(ufoObject).forEach(([key, value]) => {
+// 	// Use `Object.entries` and forEach to iterate through keys and values of ufo object
+// 	Object.entries(ufoObject).forEach(([key, value]) => {
 
-		// Append one cell per ufo object value 
-		var cell = row.append("td");
-        cell.text(value);
-    });
-});
+// 		// Append one cell per ufo object value 
+// 		var cell = row.append("td");
+//         cell.text(value);
+//     });
+// });
 }
