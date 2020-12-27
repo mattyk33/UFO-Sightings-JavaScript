@@ -39,6 +39,7 @@ function runEnter() {
     d3.event.preventDefault();
 
     // // Select the input element and get the raw HTML node
+
     // //Option 2 Harder to figure Out
     // var elementChanged =d3.select("#input")
     // var inputValue= elementChanged.property("value")
@@ -63,7 +64,7 @@ function runEnter() {
     
     if (inputDateValue != "") {
         var filterData = filteredData.filter(ufoObject => ufoObject.datetime === inputDateValue);
-        		// 3. Load the new data
+        		
 		if (filterData.length !== 0) {
 			    // Clear out current contents in the table
                 tbody.html("");
@@ -211,22 +212,4 @@ function runEnter() {
             tbody.append("tr").append("td").text("No sightings for this shape");
         }
     }
-  
-//     // Clear out current contents in the table
-//     tbody.html("");
-
-//     // Loop through each ufo object in the data array
-//     filterData.forEach((ufoObject) => {
-
-// 	// Append one table row for each ufo object
-// 	var row = tbody.append("tr");
-
-// 	// Use `Object.entries` and forEach to iterate through keys and values of ufo object
-// 	Object.entries(ufoObject).forEach(([key, value]) => {
-
-// 		// Append one cell per ufo object value 
-// 		var cell = row.append("td");
-//         cell.text(value);
-//     });
-// });
 }
